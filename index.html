@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Art Alive | Programme Selection</title>
+  
+  <!-- Google Fonts for Plus Jakarta Sans and Noto Sans Malayalam ONLY -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       SIMPLIFIED CLEAN DESIGN SYSTEM & SMALLER CRISP TYPOGRAPHY
+       ========================================================================== */
+    :root {
+      --bg-main: #FFFFFF;
+      --bg-surface: #F8FAFC;
+      --border-color: #E2E8F0;
+      --primary: #00694C;
+      --primary-light: #ECFDF5;
+      --primary-hover: #00533C;
+      --primary-border: #A7F3D0;
+      --accent: #0E5463;
+      --accent-light: #E0F2FE;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-light: #94A3B8;
+      
+      --danger: #DC2626;
+      --danger-light: #FEF2F2;
+      --warning: #D97706;
+      --warning-light: #FFFBEB;
+      --success: #16A34A;
+      --success-light: #DCFCE7;
+
+      --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+      --shadow: 0 2px 4px -1px rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08);
+
+      --radius-sm: 4px;
+      --radius: 6px;
+      --radius-md: 8px;
+      --radius-full: 9999px;
+      --transition: all 0.15s ease-in-out;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Malayalam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      font-size: 13px; /* Smaller base font */
+      line-height: 1.4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Header Bar */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: #FFFFFF;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+      user-select: none;
+    }
+
+    .brand-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .brand-title .separator {
+      color: var(--text-light);
+      font-weight: 300;
+    }
+
+    .brand-title .subhead {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 12.5px;
+    }
+
+    /* Navigation tabs */
+    .nav-switcher {
+      display: flex;
+      align-items: center;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 3px;
+      border-radius: var(--radius-md);
+      gap: 3px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+
+    .nav-switcher::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+      height: 30px;
+    }
+
+    .nav-btn:hover {
+      color: var(--text-main);
+      background-color: rgba(226, 232, 240, 0.7);
+    }
+
+    .nav-btn.active {
+      color: var(--primary);
+      background-color: var(--bg-main);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-btn svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Main Container */
+    .app-main {
+      flex: 1;
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 14px 16px 90px 16px; /* 90px bottom space for sticky bar */
+    }
+
+    .view-container {
+      display: none;
+    }
+
+    .view-container.active {
+      display: block;
+    }
+
+    /* Simplified Surface Card */
+    .simple-card {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 12px;
+    }
+
+    /* Participant Selector Bar */
+    .participant-selector-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .participant-search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .participant-search-input {
+      width: 100%;
+      height: 36px;
+      padding: 6px 32px 6px 34px;
+      font-size: 12.5px;
+      font-weight: 500;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .participant-search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+
+    .search-icon-svg {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-clear-cross {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      display: none;
+      padding: 2px;
+      border-radius: var(--radius-full);
+    }
+
+    .search-clear-cross:hover {
+      color: var(--text-main);
+    }
+
+    /* Autocomplete dropdown */
+    .autocomplete-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      max-height: 260px;
+      overflow-y: auto;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      z-index: 40;
+      display: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .autocomplete-dropdown.show {
+      display: block;
+    }
+
+    .autocomplete-item {
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid var(--bg-surface);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 12px;
+    }
+
+    .autocomplete-item:hover, .autocomplete-item.highlighted {
+      background-color: var(--primary-light);
+    }
+
+    .roll-pill {
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .batch-pill {
+      font-size: 10.5px;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      white-space: nowrap;
+      background-color: #F1F5F9;
+      color: #475569;
+    }
+
+    /* Active participant loaded banner */
+    .active-participant-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 12px;
+      background-color: var(--primary-light);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius);
+      width: 100%;
+    }
+
+    .active-participant-banner.show {
+      display: flex;
+    }
+
+    .active-user-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .active-user-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .btn-sm-outline {
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-main);
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-sm-outline:hover {
+      background-color: var(--bg-surface);
+      border-color: var(--text-light);
+    }
+
+    /* Simplified Filter Row */
+    .filter-bar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .filter-pill-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      background-color: var(--bg-main);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .pill-btn:hover {
+      border-color: var(--text-light);
+      color: var(--text-main);
+    }
+
+    .pill-btn.active {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    .pill-badge-num {
+      font-size: 10px;
+      padding: 0 4px;
+      border-radius: var(--radius-full);
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+
+    .pill-btn.active .pill-badge-num {
+      background-color: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+
+    .filter-search-box {
+      height: 30px;
+      padding: 4px 10px;
+      font-size: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      outline: none;
+      width: 200px;
+      transition: var(--transition);
+    }
+
+    .filter-search-box:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+
+    /* Compact Programme Cards Grid */
+    .programmes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    .programme-card {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--transition);
+      min-height: 95px;
+    }
+
+    .programme-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .programme-card.is-selected {
+      border: 1.5px solid var(--primary);
+      background-color: var(--primary-light);
+    }
+
+    .card-top-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .code-tag {
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 1px 5px;
+      border-radius: var(--radius-sm);
+    }
+
+    .programme-card.is-selected .code-tag {
+      background-color: #FFFFFF;
+      border-color: var(--primary-border);
+    }
+
+    .tag-sec {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .tag-sec.junior { background-color: #E0F2FE; color: #0369A1; }
+    .tag-sec.senior { background-color: #EDE9FE; color: #6D28D9; }
+    .tag-sec.general { background-color: #FEF3C7; color: #B45309; }
+
+    .tag-type {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 1px 5px;
+      border-radius: var(--radius-full);
+      background-color: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .card-title-line {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .title-ml {
+      font-family: 'Noto Sans Malayalam', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .title-en {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .card-bot-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      padding-top: 6px;
+      margin-top: 2px;
+    }
+
+    .programme-card.is-selected .card-bot-line {
+      border-top-color: var(--primary-border);
+    }
+
+    .sel-status-text {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .programme-card.is-selected .sel-status-text {
+      color: var(--primary);
+    }
+
+    .mini-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(--border-color);
+      background-color: var(--bg-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .mini-checkbox svg {
+      width: 12px;
+      height: 12px;
+      color: #FFFFFF;
+      stroke-width: 3;
+      display: none;
+    }
+
+    .programme-card.is-selected .mini-checkbox {
+      border-color: var(--primary);
+      background-color: var(--primary);
+    }
+
+    .programme-card.is-selected .mini-checkbox svg {
+      display: block;
+    }
+
+    /* Sticky Bottom Bar */
+    .sticky-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 45;
+      background-color: rgba(255, 255, 255, 0.98);
+      border-top: 1px solid var(--border-color);
+      box-shadow: 0 -2px 10px rgba(15, 23, 42, 0.06);
+      padding: 8px 16px;
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
+
+    .bottom-bar-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .bar-summary-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 16px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background-color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      height: 34px;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-primary:disabled {
+      background-color: var(--border-color);
+      border-color: var(--border-color);
+      color: var(--text-light);
+      cursor: not-allowed;
+    }
+
+    /* Public Directory & Admin Tables */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .data-table th {
+      background-color: var(--bg-surface);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .data-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .data-table tr:hover td {
+      background-color: #FAFCFE;
+    }
+
+    .bilingual-pill {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      padding: 2px 6px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      margin: 1px;
+    }
+
+    .bilingual-pill .b-code {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .bilingual-pill .b-ml {
+      font-weight: 700;
+    }
+
+    .bilingual-pill .b-en {
+      color: var(--text-muted);
+    }
+
+    /* KPI Mini Cards */
+    .kpi-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .kpi-mini-card {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .kpi-mini-val {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+
+    .kpi-mini-lbl {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Accordion items */
+    .simple-accordion {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      background-color: var(--bg-main);
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+
+    .accordion-head {
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      background-color: var(--bg-main);
+      font-size: 12.5px;
+    }
+
+    .accordion-head:hover {
+      background-color: var(--bg-surface);
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 10px 12px;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      font-size: 12px;
+    }
+
+    .simple-accordion.open .accordion-body {
+      display: block;
+    }
+
+    .simple-accordion.open .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    .chevron-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      transition: transform 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(15, 23, 42, 0.5);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-box {
+      background-color: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      max-width: 380px;
+      width: 100%;
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .modal-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pin-box {
+      width: 100%;
+      height: 42px;
+      font-size: 18px;
+      letter-spacing: 0.25em;
+      text-align: center;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius);
+      outline: none;
+      margin: 10px 0;
+    }
+
+    .pin-box:focus {
+      border-color: var(--primary);
+    }
+
+    /* Toasts */
+    .toast-container {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 110;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      pointer-events: none;
+    }
+
+    .toast-msg {
+      pointer-events: auto;
+      background-color: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 8px 12px;
+      box-shadow: var(--shadow-md);
+      font-size: 12px;
+      max-width: 340px;
+    }
+
+    /* Mobile media query */
+    @media (max-width: 640px) {
+      .app-main {
+        padding: 10px 10px 105px 10px;
+      }
+      .programmes-grid {
+        grid-template-columns: 1fr;
+      }
+      .filter-search-box {
+        width: 100%;
+      }
+      .bottom-bar-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+      }
+      .bottom-bar-actions {
+        display: flex;
+        gap: 6px;
+      }
+      .bottom-bar-actions button {
+        flex: 1;
+      }
+      .kpi-mini-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Bar -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <div class="brand-logo-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        </div>
+        <div class="brand-title">
+          <span>Art Alive</span>
+          <span class="separator">|</span>
+          <span class="subhead">Programme Selection</span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-switcher">
+        <button id="navParticipantBtn" class="nav-btn active" onclick="switchMainView('participant')">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+          <span>Select Programmes</span>
+        </button>
+        <button id="navPublicBtn" class="nav-btn" onclick="switchMainView('public')">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+          <span>All Selections</span>
+        </button>
+        <button id="navAdminBtn" class="nav-btn" onclick="requestAdminAccess()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+          <span>Admin</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-main">
+
+    <!-- ========================================================================
+         VIEW 1: PARTICIPANT PORTAL
+         ======================================================================== -->
+    <div id="participantView" class="view-container active">
+      
+      <!-- Participant Selection Bar -->
+      <div class="simple-card">
+        <div class="participant-selector-row">
+          
+          <!-- Search input when no participant is selected -->
+          <div id="participantSearchWrap" class="participant-search-wrap">
+            <svg class="search-icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input 
+              type="text" 
+              id="participantSearchInput" 
+              class="participant-search-input" 
+              placeholder="Search your name or roll number (e.g. AT 5, TA 6)..." 
+              autocomplete="off"
+              oninput="handleParticipantSearch(this.value)"
+              onfocus="showParticipantDropdown()"
+              onkeydown="handleParticipantKeydown(event)"
+            >
+            <button id="participantSearchClearBtn" class="search-clear-cross" onclick="clearParticipantSearch()">✕</button>
+            <div id="participantDropdown" class="autocomplete-dropdown"></div>
+          </div>
+
+          <!-- Active Participant Loaded Display -->
+          <div id="activeParticipantBanner" class="active-participant-banner">
+            <div class="active-user-meta">
+              <span id="activeUserName" class="active-user-name">ABDUL WAHID</span>
+              <span id="activeUserRoll" class="roll-pill">AT 5</span>
+              <span id="activeUserBatch" class="batch-pill">Batch Awwal</span>
+              <span id="activeUserSavedCount" style="font-size:11.5px; color:var(--primary); font-weight:600;">(3 saved)</span>
+            </div>
+            <button class="btn-sm-outline" onclick="changeActiveParticipant()">Change</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Compact Filters Row -->
+      <div class="filter-bar-row">
+        <div class="filter-pill-group">
+          <button class="pill-btn active" data-sec="all" onclick="setSecFilter('all', this)">All <span class="pill-badge-num">101</span></button>
+          <button class="pill-btn" data-sec="Junior" onclick="setSecFilter('Junior', this)">Junior (ജൂനിയർ) <span class="pill-badge-num">28</span></button>
+          <button class="pill-btn" data-sec="Senior" onclick="setSecFilter('Senior', this)">Senior (സീനിയർ) <span class="pill-badge-num">28</span></button>
+          <button class="pill-btn" data-sec="General" onclick="setSecFilter('General', this)">General (ജനറൽ) <span class="pill-badge-num">45</span></button>
+        </div>
+
+        <div class="filter-pill-group">
+          <button class="pill-btn active" data-type="all" onclick="setTypeFilter('all', this)">All</button>
+          <button class="pill-btn" data-type="Onstage" onclick="setTypeFilter('Onstage', this)">Onstage</button>
+          <button class="pill-btn" data-type="Off stage" onclick="setTypeFilter('Off stage', this)">Off stage</button>
+          <button class="pill-btn" id="filterSelectedOnlyBtn" onclick="toggleOnlySelectedFilter(this)">My Selected (<span id="countOnlySelected">0</span>)</button>
+        </div>
+
+        <div>
+          <input 
+            type="text" 
+            id="programmeSearchInput" 
+            class="filter-search-box" 
+            placeholder="Search programme title or #..." 
+            oninput="handleProgrammeSearch(this.value)"
+          >
+        </div>
+      </div>
+
+      <!-- Programme Cards Grid -->
+      <div id="programmesGrid" class="programmes-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Slim Sticky Bottom Bar -->
+      <aside class="sticky-bottom-bar">
+        <div class="bottom-bar-inner">
+          <div class="bar-summary-left">
+            <span style="color:var(--text-muted);">Participant:</span>
+            <strong id="barUserName">None Selected</strong>
+            <span id="barUserRoll" class="roll-pill" style="display:none;"></span>
+            <span style="color:var(--text-light);">•</span>
+            <strong id="barSelectedCount" style="color:var(--primary);">0 Selected</strong>
+          </div>
+
+          <div class="bottom-bar-actions" style="display:flex; gap:6px;">
+            <button class="btn-sm-outline" style="height:34px; padding:0 12px;" onclick="clearCurrentSelections()">Reset</button>
+            <button id="saveSelectionsBtn" class="btn-primary" onclick="saveActiveSelections()">Save Selections</button>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- ========================================================================
+         VIEW 2: PUBLIC DIRECTORY (WHO SELECTED WHAT)
+         ======================================================================== -->
+    <div id="publicView" class="view-container">
+      
+      <!-- Mini stats -->
+      <div class="kpi-mini-grid">
+        <div class="kpi-mini-card">
+          <div>
+            <div class="kpi-mini-lbl">Candidates Registered</div>
+            <div id="pubKpiCandidates" class="kpi-mini-val">0</div>
+          </div>
+        </div>
+        <div class="kpi-mini-card">
+          <div>
+            <div class="kpi-mini-lbl">Total Selections</div>
+            <div id="pubKpiTotalEntries" class="kpi-mini-val">0</div>
+          </div>
+        </div>
+        <div class="kpi-mini-card">
+          <div>
+            <div class="kpi-mini-lbl">Active Programmes</div>
+            <div id="pubKpiActiveProgs" class="kpi-mini-val">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-view switcher -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; gap:8px; flex-wrap:wrap;">
+        <div style="display:flex; gap:4px;">
+          <button id="pubTabBtnProg" class="pill-btn active" onclick="switchPubSub('prog')">By Programme</button>
+          <button id="pubTabBtnPart" class="pill-btn" onclick="switchPubSub('part')">By Participant</button>
+        </div>
+        <span id="pubCountStatus" style="font-size:11.5px; color:var(--text-muted);">101 Programmes</span>
+      </div>
+
+      <!-- Pane 1: By Programme -->
+      <div id="pubPaneProg">
+        <div class="filter-bar-row">
+          <div class="filter-pill-group">
+            <select id="pubProgSecSelect" class="filter-search-box" style="width:auto;" onchange="renderPublicProgList()">
+              <option value="all">All Sections</option>
+              <option value="Junior">Junior (ജൂനിയർ)</option>
+              <option value="Senior">Senior (സീനിയർ)</option>
+              <option value="General">General (ജനറൽ)</option>
+            </select>
+            <select id="pubProgTypeSelect" class="filter-search-box" style="width:auto;" onchange="renderPublicProgList()">
+              <option value="all">All Types</option>
+              <option value="Onstage">Onstage</option>
+              <option value="Off stage">Off stage</option>
+            </select>
+          </div>
+          <input type="text" id="pubProgSearchBox" class="filter-search-box" placeholder="Search programme title or #..." oninput="renderPublicProgList()">
+        </div>
+
+        <div id="pubProgrammesContainer">
+          <!-- Accordion items rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Pane 2: By Participant -->
+      <div id="pubPanePart" style="display:none;">
+        <div class="filter-bar-row">
+          <div class="filter-pill-group">
+            <select id="pubPartBatchSelect" class="filter-search-box" style="width:auto;" onchange="renderPublicPartList()">
+              <option value="all">All Batches</option>
+              <option value="Batch Awwal">Batch Awwal</option>
+              <option value="Batch Thani">Batch Thani</option>
+            </select>
+          </div>
+          <input type="text" id="pubPartSearchBox" class="filter-search-box" placeholder="Search candidate name or roll..." oninput="renderPublicPartList()">
+        </div>
+
+        <div id="pubParticipantsContainer" class="programmes-grid">
+          <!-- Participant cards rendered dynamically -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================================
+         VIEW 3: ADMIN DASHBOARD
+         ======================================================================== -->
+    <div id="adminView" class="view-container">
+      
+      <!-- Top actions -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; gap:8px; flex-wrap:wrap;">
+        <h2 style="font-size:15px; font-weight:700;">Admin Dashboard</h2>
+        <div style="display:flex; gap:6px;">
+          <button class="btn-primary" style="height:30px; font-size:11.5px; padding:0 12px;" onclick="exportSelectionsToCSV()">Export CSV</button>
+          <button class="btn-sm-outline" style="height:30px;" onclick="lockAdminDashboard()">Lock Admin</button>
+        </div>
+      </div>
+
+      <!-- KPI cards -->
+      <div class="kpi-mini-grid">
+        <div class="kpi-mini-card">
+          <div>
+            <div class="kpi-mini-lbl">Total Participants</div>
+            <div id="adminKpiTotal" class="kpi-mini-val">49</div>
+          </div>
+        </div>
+        <div class="kpi-mini-card">
+          <div>
+            <div class="kpi-mini-lbl">Submitted</div>
+            <div id="adminKpiSubmitted" class="kpi-mini-val" style="color:var(--success);">0</div>
+          </div>
+        </div>
+        <div class="kpi-mini-card">
+          <div>
+            <div class="kpi-mini-lbl">Pending</div>
+            <div id="adminKpiPending" class="kpi-mini-val" style="color:var(--warning);">49</div>
+          </div>
+        </div>
+        <div class="kpi-mini-card">
+          <div>
+            <div class="kpi-mini-lbl">Total Selections</div>
+            <div id="adminKpiSelections" class="kpi-mini-val" style="color:var(--accent);">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Filters -->
+      <div class="filter-bar-row">
+        <div class="filter-pill-group">
+          <input type="text" id="adminTableSearchBox" class="filter-search-box" placeholder="Search candidate or roll..." oninput="renderAdminTable()">
+          <select id="adminTableStatusSelect" class="filter-search-box" style="width:auto;" onchange="renderAdminTable()">
+            <option value="all">All Statuses</option>
+            <option value="submitted">Submitted Only</option>
+            <option value="pending">Pending Only</option>
+          </select>
+          <select id="adminTableBatchSelect" class="filter-search-box" style="width:auto;" onchange="renderAdminTable()">
+            <option value="all">All Batches</option>
+            <option value="Batch Awwal">Batch Awwal</option>
+            <option value="Batch Thani">Batch Thani</option>
+          </select>
+        </div>
+        <span id="adminTableCountLabel" style="font-size:11.5px; color:var(--text-muted);">49 Candidates</span>
+      </div>
+
+      <!-- Responsive Table -->
+      <div style="background:#FFF; border:1px solid var(--border-color); border-radius:var(--radius); overflow-x:auto;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:70px;">Roll</th>
+              <th style="min-width:160px;">Name</th>
+              <th style="width:100px;">Batch</th>
+              <th style="width:80px;">Status</th>
+              <th style="width:60px; text-align:center;">Count</th>
+              <th style="min-width:280px;">Selected Programmes</th>
+              <th style="width:110px; text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Inline Add Participant Form -->
+      <div class="simple-card" style="margin-top:16px;">
+        <h3 style="font-size:13px; font-weight:700; margin-bottom:8px;">Add Dynamic Participant</h3>
+        <form onsubmit="handleAddNewParticipant(event)" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <input type="text" id="newPartRoll" class="filter-search-box" style="flex:1; min-width:100px;" placeholder="Roll (e.g. TA 99)" required>
+          <input type="text" id="newPartName" class="filter-search-box" style="flex:2; min-width:180px;" placeholder="Full Candidate Name" required>
+          <select id="newPartBatch" class="filter-search-box" style="width:auto;" required>
+            <option value="Batch Awwal">Batch Awwal</option>
+            <option value="Batch Thani">Batch Thani</option>
+          </select>
+          <button type="submit" class="btn-primary" style="height:30px; font-size:12px;">Add Participant</button>
+        </form>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Admin PIN Modal -->
+  <div id="adminPinModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-title">Admin Passcode</div>
+      <p style="font-size:12px; color:var(--text-muted);">Please enter administrator PIN to access dashboard.</p>
+      <input type="password" id="adminPinInput" class="pin-box" placeholder="••••" maxlength="6" onkeydown="if(event.key==='Enter') submitAdminPin()">
+      <div id="adminPinError" style="color:var(--danger); font-size:11.5px; display:none; text-align:center; margin-bottom:6px;">Incorrect PIN. Please try again.</div>
+      <div style="display:flex; justify-content:flex-end; gap:6px; margin-top:10px;">
+        <button class="btn-sm-outline" onclick="closeAdminPinModal()">Cancel</button>
+        <button class="btn-primary" style="height:30px; font-size:12px;" onclick="submitAdminPin()">Authorize</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clear Confirmation Modal -->
+  <div id="confirmClearModal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-title">Clear Selections?</div>
+      <p id="confirmClearMsg" style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Are you sure you want to clear selections for this participant?</p>
+      <div style="display:flex; justify-content:flex-end; gap:6px;">
+        <button class="btn-sm-outline" onclick="closeConfirmClearModal()">Cancel</button>
+        <button class="btn-primary" style="background:var(--danger); border-color:var(--danger); height:30px; font-size:12px;" onclick="executeClearSelections()">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Vanilla JavaScript Logic -->
+  <script>
+    const PARTICIPANTS = [
+  { id: "P01", slNo: 1, name: "ABDUL RAHOOF K", rollNo: "TA 6", batch: "Batch Thani" },
+  { id: "P02", slNo: 2, name: "ABDUL WAHID", rollNo: "AT 5", batch: "Batch Awwal" },
+  { id: "P03", slNo: 3, name: "AHAMMED JASEEL FARHAN", rollNo: "AF 4", batch: "Batch Awwal" },
+  { id: "P04", slNo: 4, name: "ARSHAD AHAMMAD", rollNo: "TA 32", batch: "Batch Thani" },
+  { id: "P05", slNo: 5, name: "H MUHAMMED KHALEEL", rollNo: "AF 9", batch: "Batch Awwal" },
+  { id: "P06", slNo: 6, name: "JASEELUDHEEN C", rollNo: "TA 47", batch: "Batch Thani" },
+  { id: "P07", slNo: 7, name: "MAHAMMAD SHAHID", rollNo: "TA 59", batch: "Batch Thani" },
+  { id: "P08", slNo: 8, name: "MOHAMED SWALIH TP", rollNo: "AT 19", batch: "Batch Awwal" },
+  { id: "P09", slNo: 9, name: "MOHAMMED JABIR KP", rollNo: "TB 15", batch: "Batch Thani" },
+  { id: "P10", slNo: 10, name: "MOHAMMED NIYAS VN", rollNo: "TB 19", batch: "Batch Thani" },
+  { id: "P11", slNo: 11, name: "MOHAMMED SAFWAN PK", rollNo: "AT 28", batch: "Batch Awwal" },
+  { id: "P12", slNo: 12, name: "MUHAMMAD BADRUDDEEN", rollNo: "TB 45", batch: "Batch Thani" },
+  { id: "P13", slNo: 13, name: "MUHAMMAD FAYIZ KC", rollNo: "TD 64", batch: "Batch Thani" },
+  { id: "P14", slNo: 14, name: "MUHAMMED BURHAN. N", rollNo: "AF 32", batch: "Batch Awwal" },
+  { id: "P15", slNo: 15, name: "MUHAMMED JUNAID KK", rollNo: "TC 29", batch: "Batch Thani" },
+  { id: "P16", slNo: 16, name: "MUHAMMED LABEEB", rollNo: "AQ 30", batch: "Batch Awwal" },
+  { id: "P17", slNo: 17, name: "MUHAMMED MEHBOOB", rollNo: "AT 50", batch: "Batch Awwal" },
+  { id: "P18", slNo: 18, name: "MUHAMMED MIDHLAJ KK", rollNo: "TC 35", batch: "Batch Thani" },
+  { id: "P19", slNo: 19, name: "MUHAMMED SAFEER CK", rollNo: "TC 53", batch: "Batch Thani" },
+  { id: "P20", slNo: 20, name: "MUHAMMED SAHAL. Y", rollNo: "AQ 38", batch: "Batch Awwal" },
+  { id: "P21", slNo: 21, name: "MUHAMMED SINAN CM", rollNo: "AQ 41", batch: "Batch Awwal" },
+  { id: "P22", slNo: 22, name: "MUHAMMED YAZEED K", rollNo: "TD 57", batch: "Batch Thani" },
+  { id: "P23", slNo: 23, name: "SALAHUDDIN AYYUB", rollNo: "AT 71", batch: "Batch Awwal" },
+  { id: "P24", slNo: 24, name: "SAYYID MUHAMED ADIL VT", rollNo: "TD 34", batch: "Batch Thani" },
+  { id: "P25", slNo: 25, name: "SAYYID MUHAMMED SAHAL", rollNo: "AH 70", batch: "Batch Awwal" },
+  { id: "P26", slNo: 26, name: "AHMAD THOYYIB K", rollNo: "AT 10", batch: "Batch Awwal" },
+  { id: "P27", slNo: 27, name: "ANWAR SABITH MT", rollNo: "TA 31", batch: "Batch Thani" },
+  { id: "P28", slNo: 28, name: "HABEEB RAHMAN MK", rollNo: "TA 44", batch: "Batch Thani" },
+  { id: "P29", slNo: 29, name: "MAHAMMAD IQBAL", rollNo: "TA 58", batch: "Batch Thani" },
+  { id: "P30", slNo: 30, name: "MAHMOOD", rollNo: "AT 17", batch: "Batch Awwal" },
+  { id: "P31", slNo: 31, name: "MARSHAD", rollNo: "TA 64", batch: "Batch Thani" },
+  { id: "P32", slNo: 32, name: "MOHAMMAD JASEL", rollNo: "TA 71", batch: "Batch Thani" },
+  { id: "P33", slNo: 33, name: "MOHAMMED NP", rollNo: "TB 20", batch: "Batch Thani" },
+  { id: "P34", slNo: 34, name: "MOHAMMED SHIBILI P", rollNo: "TB 33", batch: "Batch Thani" },
+  { id: "P35", slNo: 35, name: "MUHAMED SAFVAN VP", rollNo: "TB 40", batch: "Batch Thani" },
+  { id: "P36", slNo: 36, name: "MUHAMMAD IBRAHIM AC", rollNo: "TB 47", batch: "Batch Thani" },
+  { id: "P37", slNo: 37, name: "MUHAMMAD MIDLAJ.T", rollNo: "AQ 15", batch: "Batch Awwal" },
+  { id: "P38", slNo: 38, name: "MUHAMMED AJSAL TP", rollNo: "TB 68", batch: "Batch Thani" },
+  { id: "P39", slNo: 39, name: "MUHAMMED JUNAID VP", rollNo: "AH 33", batch: "Batch Awwal" },
+  { id: "P40", slNo: 40, name: "MUHAMMED MIQDAD CA", rollNo: "TC 38", batch: "Batch Thani" },
+  { id: "P41", slNo: 41, name: "MUHAMMED MUBSIL VK", rollNo: "AQ 32", batch: "Batch Awwal" },
+  { id: "P42", slNo: 42, name: "MUHAMMED MUSTHAFA", rollNo: "AQ 33", batch: "Batch Awwal" },
+  { id: "P43", slNo: 43, name: "MUHAMMED SABITH KS", rollNo: "AH 41", batch: "Batch Awwal" },
+  { id: "P44", slNo: 44, name: "MUHAMMED SAEED HASANAIN", rollNo: "AH 43", batch: "Batch Awwal" },
+  { id: "P45", slNo: 45, name: "MUHAMMED SINAN CK", rollNo: "AT 65", batch: "Batch Awwal" },
+  { id: "P46", slNo: 46, name: "MUHAMMED UVAIS AP", rollNo: "AT 68", batch: "Batch Awwal" },
+  { id: "P47", slNo: 47, name: "MUHAMMED UVAIS C T", rollNo: "AH 60", batch: "Batch Awwal" },
+  { id: "P48", slNo: 48, name: "NIBRASUL HAQ", rollNo: "AH 63", batch: "Batch Awwal" },
+  { id: "P49", slNo: 49, name: "SAYYID MUHAMMAD NABEEL AL AYYOOBI", rollNo: "AQ 46", batch: "Batch Awwal" }
+];
+
+    const PROGRAMMES = [
+  // JUNIOR - ONSTAGE
+  { id: "J01", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 1, nameMl: "മദ്ഹ് ഗാനം", nameEn: "Madh Song" },
+  { id: "J02", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 2, nameMl: "മാപ്പിളപ്പാട്ട്", nameEn: "Mappilappattu" },
+  { id: "J03", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 3, nameMl: "ലോജിക്കൽ റീസണിങ്", nameEn: "Logical Reasoning" },
+  { id: "J04", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 4, nameMl: "മക്തബ ജീനിയസ്", nameEn: "Maktaba Genius" },
+  { id: "J05", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 5, nameMl: "പ്രസംഗം മലയാളം", nameEn: "Elocution (Malayalam)" },
+  { id: "J06", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 6, nameMl: "പ്രസംഗം അറബിക്", nameEn: "Elocution (Arabic)" },
+  { id: "J07", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 7, nameMl: "ടെക്സ്ച്വൽ ഡിസ്കഷൻ", nameEn: "Textual Discussion" },
+  { id: "J08", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 8, nameMl: "ഫേസ് ടു ഫേസ്", nameEn: "Face to Face" },
+  { id: "J09", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 9, nameMl: "കമന്ററി", nameEn: "Commentary" },
+  { id: "J10", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 10, nameMl: "സോഷ്യോ സിനാപ്സിസ്", nameEn: "Socio Synopsis" },
+  { id: "J11", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 11, nameMl: "സീറാ ലക്ചറിങ്", nameEn: "Seerah Lecturing" },
+  { id: "J12", section: "Junior", sectionMl: "ജൂനിയർ", type: "Onstage", code: 12, nameMl: "ലൈവ് റിപ്പോർട്ടിംഗ്", nameEn: "Live Reporting" },
+  // JUNIOR - OFF STAGE
+  { id: "J13", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 13, nameMl: "മസ്അല ടെസ്റ്റ്", nameEn: "Mas'ala Test" },
+  { id: "J14", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 14, nameMl: "ഫറാഇദ് കോണ്ടസ്റ്റ്", nameEn: "Fara'id Contest" },
+  { id: "J15", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 15, nameMl: "കവിത രചന", nameEn: "Poetry Writing (Malayalam)" },
+  { id: "J16", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 16, nameMl: "കഥാ രചന", nameEn: "Story Writing (Malayalam)" },
+  { id: "J17", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 17, nameMl: "ഉപന്യാസം മലയാളം", nameEn: "Essay Writing (Malayalam)" },
+  { id: "J18", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 18, nameMl: "ഉപന്യാസം ഇംഗ്ലീഷ്", nameEn: "Essay Writing (English)" },
+  { id: "J19", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 19, nameMl: "ട്രാൻസ്ലേഷൻ (ENG - ARB)", nameEn: "Translation (ENG - ARB)" },
+  { id: "J20", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 20, nameMl: "സോഷ്യൽ ടെസ്റ്റ്", nameEn: "Social Test" },
+  { id: "J21", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 21, nameMl: "മാത്സ് റിലേ", nameEn: "Maths Relay" },
+  { id: "J22", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 22, nameMl: "പോസ്റ്റർ ഡിസൈനിങ്", nameEn: "Poster Designing" },
+  { id: "J23", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 23, nameMl: "മുദ്രാവാക്യ രചന", nameEn: "Slogan Writing" },
+  { id: "J24", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 24, nameMl: "ഇ-പോസ്റ്റർ", nameEn: "E-Poster" },
+  { id: "J25", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 25, nameMl: "കവിത രചന ഇംഗ്ലീഷ്", nameEn: "Poetry Writing (English)" },
+  { id: "J26", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 26, nameMl: "ടൈപ്പോഗ്രഫി", nameEn: "Typography" },
+  { id: "J27", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 27, nameMl: "എ.ഐ. പോം മേക്കിംഗ്", nameEn: "AI Poem Making" },
+  { id: "J28", section: "Junior", sectionMl: "ജൂനിയർ", type: "Off stage", code: 28, nameMl: "ബുക്ക് ടെസ്റ്റ്", nameEn: "Book Test" },
+
+  // SENIOR - ONSTAGE
+  { id: "S01", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 1, nameMl: "മാപ്പിളപ്പാട്ട്", nameEn: "Mappilappattu" },
+  { id: "S02", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 2, nameMl: "ഇന്റർനാഷണൽ ദർസ്", nameEn: "International Dars" },
+  { id: "S03", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 3, nameMl: "ഹൽഖ ടോക്ക്", nameEn: "Halqa Talk" },
+  { id: "S04", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 4, nameMl: "ഐഡിയൽ ടോക്ക്", nameEn: "Ideal Talk" },
+  { id: "S05", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 5, nameMl: "മുമാറസത്തു തൻകീഫ്", nameEn: "Mumarasathu Thankeef" },
+  { id: "S06", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 6, nameMl: "പോം റെസിറ്റേഷൻ Eng", nameEn: "Poem Recitation (English)" },
+  { id: "S07", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 7, nameMl: "പ്രസംഗം മലയാളം", nameEn: "Elocution (Malayalam)" },
+  { id: "S08", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 8, nameMl: "ഹംദ് ഉറുദു", nameEn: "Hamd (Urdu)" },
+  { id: "S09", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 9, nameMl: "പ്രസംഗം ഇംഗ്ലീഷ്", nameEn: "Elocution (English)" },
+  { id: "S10", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 10, nameMl: "തദ്രീസ്", nameEn: "Tadrees" },
+  { id: "S11", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 11, nameMl: "ഖുത്തുബ കോണ്ടസ്റ്റ്", nameEn: "Khutbah Contest" },
+  { id: "S12", section: "Senior", sectionMl: "സീനിയർ", type: "Onstage", code: 12, nameMl: "പൊളിറ്റിക്കൽ ഡിബേറ്റ്", nameEn: "Political Debate" },
+  // SENIOR - OFF STAGE
+  { id: "S13", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 13, nameMl: "എ.ഐ. പ്രോംപ്റ്റിംഗ്", nameEn: "AI Prompting" },
+  { id: "S14", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 14, nameMl: "കഥാരചന", nameEn: "Story Writing (Malayalam)" },
+  { id: "S15", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 15, nameMl: "തഅ്യീനുൽ ഫുനൂൻ", nameEn: "Ta'yeenul Funoon" },
+  { id: "S16", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 16, nameMl: "കവിത രചന", nameEn: "Poetry Writing (Malayalam)" },
+  { id: "S17", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 17, nameMl: "ഉപന്യാസം മലയാളം", nameEn: "Essay Writing (Malayalam)" },
+  { id: "S18", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 18, nameMl: "ഉപന്യാസം അറബിക്", nameEn: "Essay Writing (Arabic)" },
+  { id: "S19", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 19, nameMl: "പോം കൺവേർഷൻ (ENG-MAL)", nameEn: "Poem Conversion (ENG - MAL)" },
+  { id: "S20", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 20, nameMl: "കാലിഗ്രഫി", nameEn: "Calligraphy" },
+  { id: "S21", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 21, nameMl: "കവിത രചന അറബിക്", nameEn: "Poetry Writing (Arabic)" },
+  { id: "S22", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 22, nameMl: "ബലാഗ ടെസ്റ്റ്", nameEn: "Balagha Test" },
+  { id: "S23", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 23, nameMl: "മാനുസ്ക്രിപ്റ്റ് റീഡിങ്", nameEn: "Manuscript Reading" },
+  { id: "S24", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 24, nameMl: "ഡിജിറ്റൽ പെയിന്റിംഗ്", nameEn: "Digital Painting" },
+  { id: "S25", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 25, nameMl: "ഇ-പോസ്റ്റർ", nameEn: "E-Poster" },
+  { id: "S26", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 26, nameMl: "റീ ടെക്സ്റ്റ്", nameEn: "Re-Text" },
+  { id: "S27", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 27, nameMl: "മദ്ഹ് ഗാന രചന", nameEn: "Madh Song Writing" },
+  { id: "S28", section: "Senior", sectionMl: "സീനിയർ", type: "Off stage", code: 28, nameMl: "ബുക്ക് ടെസ്റ്റ്", nameEn: "Book Test" },
+
+  // GENERAL - ONSTAGE
+  { id: "G01", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 1, nameMl: "തർതീൽ", nameEn: "Thartheel" },
+  { id: "G02", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 2, nameMl: "ബൈലിംഗ്വൽ സ്പീച്ച്", nameEn: "Bilingual Speech" },
+  { id: "G03", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 3, nameMl: "ഹദീസ് കോണ്ടസ്റ്റ്", nameEn: "Hadith Contest" },
+  { id: "G04", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 4, nameMl: "ക്യാപ്ചർ ദി ഫ്ലാഗ്", nameEn: "Capture the Flag" },
+  { id: "G05", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 5, nameMl: "സ്പോട്ട് ദഅ്വ", nameEn: "Spot Da'wah" },
+  { id: "G06", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 6, nameMl: "വഅള്", nameEn: "Wa'z" },
+  { id: "G07", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 7, nameMl: "ഹിഫ്ള്", nameEn: "Hifz" },
+  { id: "G08", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 8, nameMl: "മുശാഅറ", nameEn: "Mushaira" },
+  { id: "G09", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 9, nameMl: "ബ്രെയിൻ ബാറ്റിൽ", nameEn: "Brain Battle" },
+  { id: "G10", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 10, nameMl: "പേപ്പർ പ്രസന്റേഷൻ", nameEn: "Paper Presentation" },
+  { id: "G11", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 11, nameMl: "ഖവാലി", nameEn: "Qawwali" },
+  { id: "G12", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 12, nameMl: "പ്രസംഗം ഉറുദു", nameEn: "Elocution (Urdu)" },
+  { id: "G13", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 13, nameMl: "എക്സ്റ്റംബർ സ്പീച്ച്", nameEn: "Extempore Speech" },
+  { id: "G14", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 14, nameMl: "Voice X", nameEn: "Voice X" },
+  { id: "G15", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 15, nameMl: "നശീദ അറബിയ്യ", nameEn: "Arabic Nasheed" },
+  { id: "G16", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 16, nameMl: "മാല പ്രസന്റേഷൻ", nameEn: "Mala Presentation" },
+  { id: "G17", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 17, nameMl: "ഇന്റർനാഷണൽ സമ്മിറ്റ്", nameEn: "International Summit" },
+  { id: "G18", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 18, nameMl: "ഫിഖ്ഹ് പോഡ്കാസ്റ്റ്", nameEn: "Fiqh Podcast" },
+  { id: "G19", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 19, nameMl: "ക്യാപ്ഷൻ സോങ്", nameEn: "Caption Song" },
+  { id: "G20", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 20, nameMl: "മാഷപ്പ്", nameEn: "Mashup" },
+  { id: "G21", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 21, nameMl: "DPR പ്രസന്റേഷൻ", nameEn: "DPR Presentation" },
+  { id: "G22", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 22, nameMl: "സെന്റിനറി എക്സ്പെഡിഷൻ", nameEn: "Centenary Expedition" },
+  { id: "G23", section: "General", sectionMl: "ജനറൽ", type: "Onstage", code: 23, nameMl: "ചുമരെഴുത്ത്", nameEn: "Wall Writing (Graffiti)" },
+  // GENERAL - OFF STAGE
+  { id: "G24", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 24, nameMl: "റീൽ പോസ്റ്റ്", nameEn: "Reel Post" },
+  { id: "G25", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 25, nameMl: "ഫീച്ചർ റൈറ്റിങ്", nameEn: "Feature Writing" },
+  { id: "G26", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 26, nameMl: "മാപ്പിളപ്പാട്ട് രചന", nameEn: "Mappilappattu Writing" },
+  { id: "G27", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 27, nameMl: "പെൻസിൽ ആർട്ട്", nameEn: "Pencil Art" },
+  { id: "G28", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 28, nameMl: "ഉപന്യാസം ഉറുദു", nameEn: "Essay Writing (Urdu)" },
+  { id: "G29", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 29, nameMl: "സ്പോട്ട് മാഗസിൻ", nameEn: "Spot Magazine" },
+  { id: "G30", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 30, nameMl: "നെറ്റ് ടെസ്റ്റ്", nameEn: "NET Test" },
+  { id: "G31", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 31, nameMl: "ലിസണിങ് ടെസ്റ്റ്", nameEn: "Listening Test" },
+  { id: "G32", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 32, nameMl: "മീറ്റ് ദി എക്സ്പേർട്ട്", nameEn: "Meet the Expert" },
+  { id: "G33", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 33, nameMl: "അക്കാദമിക് ഇന്റർവ്യൂ", nameEn: "Academic Interview" },
+  { id: "G34", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 34, nameMl: "ഇവന്റ് ഡിസൈനിങ്", nameEn: "Event Designing" },
+  { id: "G35", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 35, nameMl: "എ.ഐ വീഡിയോ മേക്കിങ്", nameEn: "AI Video Making" },
+  { id: "G36", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 36, nameMl: "മാഗസിൻ ലേ ഔട്ട്", nameEn: "Magazine Layout" },
+  { id: "G37", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 37, nameMl: "ഉപന്യാസം കന്നട", nameEn: "Essay Writing (Kannada)" },
+  { id: "G38", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 38, nameMl: "കഥ രചന കന്നട", nameEn: "Story Writing (Kannada)" },
+  { id: "G39", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 39, nameMl: "ഡിജിറ്റൽ ഇല്ലുസ്ട്രേഷൻ", nameEn: "Digital Illustration" },
+  { id: "G40", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 40, nameMl: "ഖുർആൻ ആർട്ടിക്കിൾ", nameEn: "Quran Article" },
+  { id: "G41", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 41, nameMl: "ഹെറിറ്റേജ് വോക്ക്", nameEn: "Heritage Walk" },
+  { id: "G42", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 42, nameMl: "ഡിജിറ്റൽ മാഗസിൻ", nameEn: "Digital Magazine" },
+  { id: "G43", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 43, nameMl: "തസ്നീഫ്", nameEn: "Tasneef" },
+  { id: "G44", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 44, nameMl: "മുഖ്തസർ കഹാനി", nameEn: "Mukhtasar Kahani (Short Story - Urdu)" },
+  { id: "G45", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 45, nameMl: "സയൻസ് വിഷൻ", nameEn: "Science Vision" }
+];
+
+    const STORAGE_KEY_SELECTIONS = "artalive_selections_v1";
+    const STORAGE_KEY_CUSTOM_PARTICIPANTS = "artalive_custom_participants_v1";
+    const DEFAULT_ADMIN_PIN = "9844";
+
+    let isAdminUnlocked = false;
+    let activeParticipant = null;
+    let activeDraftSelections = new Set();
+    let participantToClear = null;
+    let activeAutocompleteIndex = -1;
+
+    let currentSecFilter = "all";
+    let currentTypeFilter = "all";
+    let currentSearchQuery = "";
+    let filterOnlySelected = false;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderProgrammeCards();
+      updateStickyBar();
+
+      document.addEventListener("click", (e) => {
+        const wrap = document.getElementById("participantSearchWrap");
+        if (wrap && !wrap.contains(e.target)) {
+          hideParticipantDropdown();
+        }
+      });
+    });
+
+    function getAllParticipants() {
+      try {
+        const custom = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM_PARTICIPANTS) || "[]");
+        return [...PARTICIPANTS, ...custom];
+      } catch (e) {
+        return PARTICIPANTS;
+      }
+    }
+
+    function getAllSelectionsMap() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY_SELECTIONS) || "{}");
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveSelectionsMap(map) {
+      localStorage.setItem(STORAGE_KEY_SELECTIONS, JSON.stringify(map));
+    }
+
+    function getParticipantSelections(id) {
+      const map = getAllSelectionsMap();
+      return Array.isArray(map[id]) ? map[id] : [];
+    }
+
+    // Participant Autocomplete
+    function handleParticipantSearch(query) {
+      const clearBtn = document.getElementById("participantSearchClearBtn");
+      clearBtn.style.display = query.trim() ? "inline-block" : "none";
+      activeAutocompleteIndex = -1;
+      showParticipantDropdown(query);
+    }
+
+    function handleParticipantKeydown(e) {
+      const dropdown = document.getElementById("participantDropdown");
+      const items = dropdown.querySelectorAll(".autocomplete-item");
+      if (!items.length || !dropdown.classList.contains("show")) return;
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        activeAutocompleteIndex = (activeAutocompleteIndex + 1) % items.length;
+        updateAutocompleteHighlight(items);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        activeAutocompleteIndex = (activeAutocompleteIndex - 1 + items.length) % items.length;
+        updateAutocompleteHighlight(items);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (activeAutocompleteIndex >= 0 && activeAutocompleteIndex < items.length) {
+          items[activeAutocompleteIndex].click();
+        } else if (items.length > 0) {
+          items[0].click();
+        }
+      } else if (e.key === "Escape") {
+        hideParticipantDropdown();
+      }
+    }
+
+    function updateAutocompleteHighlight(items) {
+      items.forEach((item, idx) => {
+        if (idx === activeAutocompleteIndex) {
+          item.classList.add("highlighted");
+          item.scrollIntoView({ block: "nearest" });
+        } else {
+          item.classList.remove("highlighted");
+        }
+      });
+    }
+
+    function clearParticipantSearch() {
+      const input = document.getElementById("participantSearchInput");
+      input.value = "";
+      document.getElementById("participantSearchClearBtn").style.display = "none";
+      showParticipantDropdown("");
+      input.focus();
+    }
+
+    function showParticipantDropdown(query = "") {
+      const dropdown = document.getElementById("participantDropdown");
+      const trimmed = query.trim().toLowerCase();
+      const allParts = getAllParticipants();
+      const selectionsMap = getAllSelectionsMap();
+
+      const filtered = allParts.filter(p => {
+        if (!trimmed) return true;
+        return p.name.toLowerCase().includes(trimmed) || 
+               p.rollNo.toLowerCase().includes(trimmed) ||
+               (p.batch && p.batch.toLowerCase().includes(trimmed));
+      });
+
+      if (filtered.length === 0) {
+        dropdown.innerHTML = `<div style="padding:10px 12px; font-size:11.5px; color:var(--text-muted); text-align:center;">No match found</div>`;
+        dropdown.classList.add("show");
+        return;
+      }
+
+      dropdown.innerHTML = filtered.map(p => {
+        const count = (selectionsMap[p.id] || []).length;
+        return `
+          <div class="autocomplete-item" onclick="selectParticipant('${p.id}')">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span class="roll-pill">${escapeHtml(p.rollNo)}</span>
+              <strong>${escapeHtml(p.name)}</strong>
+              <span class="batch-pill">${escapeHtml(p.batch)}</span>
+            </div>
+            <div>
+              ${count > 0 ? `<span style="font-size:10.5px; color:var(--primary); font-weight:700;">✓ ${count} selected</span>` : `<span style="font-size:10.5px; color:var(--text-light);">Pending</span>`}
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      dropdown.classList.add("show");
+    }
+
+    function hideParticipantDropdown() {
+      const dropdown = document.getElementById("participantDropdown");
+      if (dropdown) dropdown.classList.remove("show");
+    }
+
+    function selectParticipant(id) {
+      const allParts = getAllParticipants();
+      const participant = allParts.find(p => p.id === id);
+      if (!participant) return;
+
+      activeParticipant = participant;
+      hideParticipantDropdown();
+
+      const saved = getParticipantSelections(participant.id);
+      activeDraftSelections = new Set(saved);
+
+      // Show active banner & hide search input
+      document.getElementById("participantSearchWrap").style.display = "none";
+      const banner = document.getElementById("activeParticipantBanner");
+      banner.classList.add("show");
+      document.getElementById("activeUserName").textContent = participant.name;
+      document.getElementById("activeUserRoll").textContent = participant.rollNo;
+      document.getElementById("activeUserBatch").textContent = participant.batch;
+      document.getElementById("activeUserSavedCount").textContent = saved.length > 0 ? `(${saved.length} saved)` : "(0 saved)";
+
+      renderProgrammeCards();
+      updateStickyBar();
+
+      showToast(`Loaded ${participant.name} (${participant.rollNo})`);
+    }
+
+    function changeActiveParticipant() {
+      activeParticipant = null;
+      activeDraftSelections.clear();
+      document.getElementById("activeParticipantBanner").classList.remove("show");
+      const wrap = document.getElementById("participantSearchWrap");
+      wrap.style.display = "block";
+      const searchInput = document.getElementById("participantSearchInput");
+      searchInput.value = "";
+      renderProgrammeCards();
+      updateStickyBar();
+      searchInput.focus();
+    }
+
+    // Filters
+    function setSecFilter(sec, btn) {
+      currentSecFilter = sec;
+      document.querySelectorAll("[data-sec]").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderProgrammeCards();
+    }
+
+    function setTypeFilter(type, btn) {
+      currentTypeFilter = type;
+      document.querySelectorAll("[data-type]").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderProgrammeCards();
+    }
+
+    function handleProgrammeSearch(query) {
+      currentSearchQuery = query.trim().toLowerCase();
+      renderProgrammeCards();
+    }
+
+    function toggleOnlySelectedFilter(btn) {
+      if (!activeParticipant && !filterOnlySelected) {
+        showToast("Please select your name first");
+        return;
+      }
+      filterOnlySelected = !filterOnlySelected;
+      btn.classList.toggle("active", filterOnlySelected);
+      renderProgrammeCards();
+    }
+
+    // Render Cards
+    function renderProgrammeCards() {
+      const grid = document.getElementById("programmesGrid");
+      document.getElementById("countOnlySelected").textContent = activeDraftSelections.size;
+
+      const filtered = PROGRAMMES.filter(prog => {
+        if (currentSecFilter !== "all" && prog.section !== currentSecFilter) return false;
+        if (currentTypeFilter !== "all" && prog.type !== currentTypeFilter) return false;
+        if (filterOnlySelected && !activeDraftSelections.has(prog.id)) return false;
+        if (currentSearchQuery) {
+          const matchCode = prog.id.toLowerCase().includes(currentSearchQuery) || 
+                            ('#' + prog.code).includes(currentSearchQuery) || 
+                            String(prog.code) === currentSearchQuery;
+          const matchMl = prog.nameMl.toLowerCase().includes(currentSearchQuery);
+          const matchEn = prog.nameEn.toLowerCase().includes(currentSearchQuery);
+          if (!matchCode && !matchMl && !matchEn) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-muted); font-size:12px;">No programmes match filter.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(prog => {
+        const isSelected = activeDraftSelections.has(prog.id);
+        const secClass = prog.section.toLowerCase();
+
+        return `
+          <div 
+            class="programme-card ${isSelected ? 'is-selected' : ''}" 
+            onclick="toggleProgSelection('${prog.id}')"
+            id="p-card-${prog.id}"
+          >
+            <div class="card-top-line">
+              <span class="code-tag">#${prog.code}</span>
+              <div style="display:flex; gap:4px;">
+                <span class="tag-sec ${secClass}">${prog.section}</span>
+                <span class="tag-type">${prog.type}</span>
+              </div>
+            </div>
+
+            <div class="card-title-line">
+              <span class="title-ml">${escapeHtml(prog.nameMl)}</span>
+              <span class="title-en">${escapeHtml(prog.nameEn)}</span>
+            </div>
+
+            <div class="card-bot-line">
+              <span class="sel-status-text">${isSelected ? 'Selected ✓' : 'Click to select'}</span>
+              <div class="mini-checkbox">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function toggleProgSelection(id) {
+      if (!activeParticipant) {
+        showToast("Please search and select your name first!");
+        const input = document.getElementById("participantSearchInput");
+        input.focus();
+        input.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
+      if (activeDraftSelections.has(id)) {
+        activeDraftSelections.delete(id);
+      } else {
+        activeDraftSelections.add(id);
+      }
+
+      const card = document.getElementById(`p-card-${id}`);
+      if (card) {
+        const isSelected = activeDraftSelections.has(id);
+        card.classList.toggle("is-selected", isSelected);
+        const txt = card.querySelector(".sel-status-text");
+        if (txt) txt.textContent = isSelected ? "Selected ✓" : "Click to select";
+      }
+
+      document.getElementById("countOnlySelected").textContent = activeDraftSelections.size;
+      updateStickyBar();
+    }
+
+    function updateStickyBar() {
+      const nameEl = document.getElementById("barUserName");
+      const rollEl = document.getElementById("barUserRoll");
+      const countEl = document.getElementById("barSelectedCount");
+      const saveBtn = document.getElementById("saveSelectionsBtn");
+
+      if (activeParticipant) {
+        nameEl.textContent = activeParticipant.name;
+        rollEl.textContent = activeParticipant.rollNo;
+        rollEl.style.display = "inline-block";
+        saveBtn.disabled = false;
+      } else {
+        nameEl.textContent = "None Selected";
+        rollEl.style.display = "none";
+        saveBtn.disabled = true;
+      }
+
+      countEl.textContent = `${activeDraftSelections.size} Selected`;
+    }
+
+    function clearCurrentSelections() {
+      if (!activeParticipant) return;
+      activeDraftSelections.clear();
+      renderProgrammeCards();
+      updateStickyBar();
+      showToast("Selections reset");
+    }
+
+    function saveActiveSelections() {
+      if (!activeParticipant) return;
+      const map = getAllSelectionsMap();
+      const arr = Array.from(activeDraftSelections);
+      map[activeParticipant.id] = arr;
+      saveSelectionsMap(map);
+
+      document.getElementById("activeUserSavedCount").textContent = `(${arr.length} saved)`;
+      showToast(`Saved ${arr.length} programmes for ${activeParticipant.name}!`);
+
+      refreshPublicData();
+      if (isAdminUnlocked) {
+        updateAdminKPIs();
+        renderAdminTable();
+      }
+    }
+
+    // View Switching
+    function switchMainView(view) {
+      document.getElementById("participantView").classList.remove("active");
+      document.getElementById("publicView").classList.remove("active");
+      document.getElementById("adminView").classList.remove("active");
+
+      document.getElementById("navParticipantBtn").classList.remove("active");
+      document.getElementById("navPublicBtn").classList.remove("active");
+      document.getElementById("navAdminBtn").classList.remove("active");
+
+      if (view === "admin") {
+        if (!isAdminUnlocked) {
+          openAdminPinModal();
+          return;
+        }
+        document.getElementById("adminView").classList.add("active");
+        document.getElementById("navAdminBtn").classList.add("active");
+        updateAdminKPIs();
+        renderAdminTable();
+      } else if (view === "public") {
+        document.getElementById("publicView").classList.add("active");
+        document.getElementById("navPublicBtn").classList.add("active");
+        refreshPublicData();
+      } else {
+        document.getElementById("participantView").classList.add("active");
+        document.getElementById("navParticipantBtn").classList.add("active");
+        renderProgrammeCards();
+        updateStickyBar();
+      }
+    }
+
+    function requestAdminAccess() {
+      if (isAdminUnlocked) switchMainView("admin");
+      else openAdminPinModal();
+    }
+
+    function openAdminPinModal() {
+      const modal = document.getElementById("adminPinModal");
+      const pin = document.getElementById("adminPinInput");
+      pin.value = "";
+      document.getElementById("adminPinError").style.display = "none";
+      modal.classList.add("show");
+      setTimeout(() => pin.focus(), 100);
+    }
+
+    function closeAdminPinModal() {
+      document.getElementById("adminPinModal").classList.remove("show");
+    }
+
+    function submitAdminPin() {
+      const pin = document.getElementById("adminPinInput").value;
+      if (pin === DEFAULT_ADMIN_PIN) {
+        isAdminUnlocked = true;
+        closeAdminPinModal();
+        showToast("Admin Authorized");
+        switchMainView("admin");
+      } else {
+        document.getElementById("adminPinError").style.display = "block";
+      }
+    }
+
+    function lockAdminDashboard() {
+      isAdminUnlocked = false;
+      showToast("Admin Locked");
+      switchMainView("participant");
+    }
+
+    // Public Directory Logic
+    let currentPubSub = "prog";
+    function switchPubSub(tab) {
+      currentPubSub = tab;
+      document.getElementById("pubTabBtnProg").classList.toggle("active", tab === "prog");
+      document.getElementById("pubTabBtnPart").classList.toggle("active", tab === "part");
+      document.getElementById("pubPaneProg").style.display = tab === "prog" ? "block" : "none";
+      document.getElementById("pubPanePart").style.display = tab === "part" ? "block" : "none";
+      refreshPublicData();
+    }
+
+    function refreshPublicData() {
+      const allParts = getAllParticipants();
+      const map = getAllSelectionsMap();
+
+      let candCount = 0;
+      let totalSel = 0;
+      const activeProgs = new Set();
+
+      allParts.forEach(p => {
+        const s = map[p.id];
+        if (Array.isArray(s) && s.length > 0) {
+          candCount++;
+          totalSel += s.length;
+          s.forEach(id => activeProgs.add(id));
+        }
+      });
+
+      document.getElementById("pubKpiCandidates").textContent = `${candCount} / ${allParts.length}`;
+      document.getElementById("pubKpiTotalEntries").textContent = totalSel;
+      document.getElementById("pubKpiActiveProgs").textContent = `${activeProgs.size} / ${PROGRAMMES.length}`;
+
+      if (currentPubSub === "prog") renderPublicProgList();
+      else renderPublicPartList();
+    }
+
+    function renderPublicProgList() {
+      const container = document.getElementById("pubProgrammesContainer");
+      const secVal = document.getElementById("pubProgSecSelect").value;
+      const typeVal = document.getElementById("pubProgTypeSelect").value;
+      const search = (document.getElementById("pubProgSearchBox").value || "").trim().toLowerCase();
+
+      const allParts = getAllParticipants();
+      const map = getAllSelectionsMap();
+      const progToUsers = new Map();
+      PROGRAMMES.forEach(p => progToUsers.set(p.id, []));
+
+      allParts.forEach(p => {
+        (map[p.id] || []).forEach(id => {
+          if (progToUsers.has(id)) progToUsers.get(id).push(p);
+        });
+      });
+
+      const filtered = PROGRAMMES.filter(p => {
+        if (secVal !== "all" && p.section !== secVal) return false;
+        if (typeVal !== "all" && p.type !== typeVal) return false;
+        if (search) {
+          const matchCode = p.id.toLowerCase().includes(search) || ('#' + p.code).includes(search) || String(p.code) === search;
+          const matchMl = p.nameMl.toLowerCase().includes(search);
+          const matchEn = p.nameEn.toLowerCase().includes(search);
+          if (!matchCode && !matchMl && !matchEn) return false;
+        }
+        return true;
+      });
+
+      document.getElementById("pubCountStatus").textContent = `${filtered.length} of ${PROGRAMMES.length} Programmes`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:24px; color:var(--text-muted); font-size:12px;">No programmes match filter.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => {
+        const users = progToUsers.get(p.id) || [];
+        const count = users.length;
+
+        return `
+          <div class="simple-accordion" id="acc-${p.id}">
+            <div class="accordion-head" onclick="toggleAcc('${p.id}')">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="code-tag">#${p.code}</span>
+                <span class="tag-sec ${p.section.toLowerCase()}">${p.section}</span>
+                <span class="tag-type">${p.type}</span>
+                <strong>${escapeHtml(p.nameMl)}</strong>
+                <span style="color:var(--text-muted); font-size:11.5px;">(${escapeHtml(p.nameEn)})</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:11px; font-weight:700; color:${count > 0 ? 'var(--primary)' : 'var(--text-light)'};">
+                  ${count} Candidate${count === 1 ? '' : 's'}
+                </span>
+                <svg class="chevron-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </div>
+            </div>
+            <div class="accordion-body">
+              ${count > 0 ? `
+                <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                  ${users.map(u => `
+                    <div style="background:#FFF; border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:4px 8px; font-size:11.5px; display:inline-flex; align-items:center; gap:6px;">
+                      <span class="roll-pill">${escapeHtml(u.rollNo)}</span>
+                      <strong>${escapeHtml(u.name)}</strong>
+                      <span class="batch-pill">${escapeHtml(u.batch)}</span>
+                    </div>
+                  `).join("")}
+                </div>
+              ` : `
+                <span style="color:var(--text-light); font-style:italic;">No candidates registered for this event yet. Anyone can select it!</span>
+              `}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function toggleAcc(id) {
+      const el = document.getElementById(`acc-${id}`);
+      if (el) el.classList.toggle("open");
+    }
+
+    function renderPublicPartList() {
+      const container = document.getElementById("pubParticipantsContainer");
+      const batchVal = document.getElementById("pubPartBatchSelect").value;
+      const search = (document.getElementById("pubPartSearchBox").value || "").trim().toLowerCase();
+
+      const allParts = getAllParticipants();
+      const map = getAllSelectionsMap();
+      const progMap = new Map(PROGRAMMES.map(p => [p.id, p]));
+
+      const filtered = allParts.filter(p => {
+        if (batchVal !== "all" && p.batch !== batchVal) return false;
+        if (search) {
+          const matchName = p.name.toLowerCase().includes(search);
+          const matchRoll = p.rollNo.toLowerCase().includes(search);
+          if (!matchName && !matchRoll) return false;
+        }
+        return true;
+      });
+
+      document.getElementById("pubCountStatus").textContent = `${filtered.length} Candidates`;
+
+      container.innerHTML = filtered.map(p => {
+        const sel = map[p.id] || [];
+        return `
+          <div class="simple-card" style="margin-bottom:0;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <div>
+                <strong>${escapeHtml(p.name)}</strong>
+                <div style="display:flex; gap:4px; margin-top:2px;">
+                  <span class="roll-pill">${escapeHtml(p.rollNo)}</span>
+                  <span class="batch-pill">${escapeHtml(p.batch)}</span>
+                </div>
+              </div>
+              <span style="font-size:11px; font-weight:700; color:${sel.length > 0 ? 'var(--primary)' : 'var(--text-light)'};">
+                ${sel.length} chosen
+              </span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:6px;">
+              ${sel.length > 0 ? sel.map(id => {
+                const pr = progMap.get(id);
+                return pr ? `<span class="bilingual-pill"><span class="b-code">#${pr.code}</span> <span class="b-ml">${escapeHtml(pr.nameMl)}</span></span>` : '';
+              }).join("") : `<span style="font-size:11px; color:var(--text-light); font-style:italic;">No selections</span>`}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Admin Dashboard
+    function updateAdminKPIs() {
+      const allParts = getAllParticipants();
+      const map = getAllSelectionsMap();
+      let sub = 0;
+      let total = 0;
+
+      allParts.forEach(p => {
+        const s = map[p.id];
+        if (Array.isArray(s) && s.length > 0) {
+          sub++;
+          total += s.length;
+        }
+      });
+
+      document.getElementById("adminKpiTotal").textContent = allParts.length;
+      document.getElementById("adminKpiSubmitted").textContent = sub;
+      document.getElementById("adminKpiPending").textContent = allParts.length - sub;
+      document.getElementById("adminKpiSelections").textContent = total;
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById("adminTableBody");
+      const search = (document.getElementById("adminTableSearchBox").value || "").trim().toLowerCase();
+      const status = document.getElementById("adminTableStatusSelect").value;
+      const batch = document.getElementById("adminTableBatchSelect").value;
+
+      const allParts = getAllParticipants();
+      const map = getAllSelectionsMap();
+      const progMap = new Map(PROGRAMMES.map(p => [p.id, p]));
+
+      const filtered = allParts.filter(p => {
+        const sel = map[p.id] || [];
+        const isSub = sel.length > 0;
+        if (status === "submitted" && !isSub) return false;
+        if (status === "pending" && isSub) return false;
+        if (batch !== "all" && p.batch !== batch) return false;
+        if (search) {
+          const matchName = p.name.toLowerCase().includes(search);
+          const matchRoll = p.rollNo.toLowerCase().includes(search);
+          if (!matchName && !matchRoll) return false;
+        }
+        return true;
+      });
+
+      document.getElementById("adminTableCountLabel").textContent = `Showing ${filtered.length} of ${allParts.length}`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:20px; color:var(--text-muted);">No match found</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(p => {
+        const sel = map[p.id] || [];
+        const isSub = sel.length > 0;
+
+        return `
+          <tr>
+            <td><span class="roll-pill">${escapeHtml(p.rollNo)}</span></td>
+            <td><strong>${escapeHtml(p.name)}</strong></td>
+            <td><span class="batch-pill">${escapeHtml(p.batch)}</span></td>
+            <td><span style="font-size:11px; font-weight:700; color:${isSub ? 'var(--primary)' : 'var(--warning)'};">${isSub ? 'Submitted' : 'Pending'}</span></td>
+            <td style="text-align:center; font-weight:700;">${sel.length}</td>
+            <td>
+              <div style="display:flex; flex-wrap:wrap; gap:3px;">
+                ${sel.map(id => {
+                  const pr = progMap.get(id);
+                  return pr ? `<span class="bilingual-pill"><span class="b-code">#${pr.code}</span> <span class="b-ml">${escapeHtml(pr.nameMl)}</span></span>` : '';
+                }).join("")}
+              </div>
+            </td>
+            <td style="text-align:right;">
+              <button class="btn-sm-outline" onclick="adminEditPart('${p.id}')">Edit</button>
+              <button class="btn-sm-outline" style="color:var(--danger);" onclick="promptClear('${p.id}')" ${sel.length === 0 ? 'disabled style="opacity:0.4;"' : ''}>Clear</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function adminEditPart(id) {
+      selectParticipant(id);
+      switchMainView("participant");
+    }
+
+    function promptClear(id) {
+      const p = getAllParticipants().find(x => x.id === id);
+      if (!p) return;
+      participantToClear = p;
+      document.getElementById("confirmClearMsg").textContent = `Clear selections for ${p.name} (${p.rollNo})?`;
+      document.getElementById("confirmClearModal").classList.add("show");
+    }
+
+    function closeConfirmClearModal() {
+      document.getElementById("confirmClearModal").classList.remove("show");
+      participantToClear = null;
+    }
+
+    function executeClearSelections() {
+      if (!participantToClear) return;
+      const map = getAllSelectionsMap();
+      delete map[participantToClear.id];
+      saveSelectionsMap(map);
+
+      if (activeParticipant && activeParticipant.id === participantToClear.id) {
+        activeDraftSelections.clear();
+        updateStickyBar();
+      }
+
+      closeConfirmClearModal();
+      showToast(`Cleared selections for ${participantToClear.name}`);
+      updateAdminKPIs();
+      renderAdminTable();
+      refreshPublicData();
+    }
+
+    function handleAddNewParticipant(e) {
+      e.preventDefault();
+      const roll = document.getElementById("newPartRoll").value.trim().toUpperCase();
+      const name = document.getElementById("newPartName").value.trim().toUpperCase();
+      const batch = document.getElementById("newPartBatch").value;
+
+      if (!roll || !name) return;
+
+      const all = getAllParticipants();
+      if (all.some(p => p.rollNo === roll)) {
+        showToast("Roll number already exists!");
+        return;
+      }
+
+      const custom = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM_PARTICIPANTS) || "[]");
+      custom.push({ id: `C_${Date.now()}`, slNo: all.length + 1, name, rollNo: roll, batch });
+      localStorage.setItem(STORAGE_KEY_CUSTOM_PARTICIPANTS, JSON.stringify(custom));
+
+      document.getElementById("newPartRoll").value = "";
+      document.getElementById("newPartName").value = "";
+      showToast(`Added ${name} (${roll})`);
+
+      updateAdminKPIs();
+      renderAdminTable();
+      refreshPublicData();
+    }
+
+    function exportSelectionsToCSV() {
+      const allParts = getAllParticipants();
+      const map = getAllSelectionsMap();
+      const progMap = new Map(PROGRAMMES.map(p => [p.id, p]));
+
+      const headers = ["Roll Number", "Participant Name", "Original Batch", "Selected Count", "Selected Programme Codes", "Selected Programme Names"];
+      const rows = allParts.map(p => {
+        const sel = map[p.id] || [];
+        const codes = sel.map(id => {
+          const pr = progMap.get(id);
+          return pr ? `#${pr.code}` : id;
+        }).join("; ");
+        const names = sel.map(id => {
+          const pr = progMap.get(id);
+          return pr ? `${pr.nameMl} (${pr.nameEn})` : id;
+        }).join("; ");
+
+        return [p.rollNo, p.name, p.batch, sel.length, codes, names];
+      });
+
+      const csvLines = [headers.map(csvEsc).join(","), ...rows.map(r => r.map(csvEsc).join(","))];
+      const csvStr = "\uFEFF" + csvLines.join("\r\n");
+      const blob = new Blob([csvStr], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ArtAlive_Selections.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("CSV Downloaded");
+    }
+
+    function csvEsc(v) {
+      if (v === null || v === undefined) return '""';
+      return `"${String(v).replace(/"/g, '""')}"`;
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById("toastContainer");
+      const t = document.createElement("div");
+      t.className = "toast-msg";
+      t.textContent = msg;
+      container.appendChild(t);
+      setTimeout(() => {
+        if (t.parentElement) t.parentElement.removeChild(t);
+      }, 3000);
+    }
+
+    function escapeHtml(t) {
+      if (!t) return "";
+      return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
