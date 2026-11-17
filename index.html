@@ -1190,6 +1190,36 @@
         </div>
       </div>
 
+      <!-- Cloud Database Sync Status & Settings -->
+      <div class="simple-card" style="border-left: 3px solid var(--primary); margin-bottom: 12px; background: #F8FAFC;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <div>
+            <div style="font-size:12px; font-weight:700; color:var(--text-main); display:flex; align-items:center; gap:6px;">
+              <span>Cloud Realtime Sync</span>
+              <span id="cloudSyncStatusBadge" style="font-size:10.5px; font-weight:600; padding:2px 6px; border-radius:4px; background:#FFF; border:1px solid var(--border-color);">Checking...</span>
+            </div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">
+              Syncs submissions in real-time across all participants' personal phones.
+            </div>
+          </div>
+          <div style="display:flex; gap:6px; align-items:center;">
+            <button class="btn-sm-outline" onclick="syncCloudData(true)" style="height:28px;">🔄 Sync Now</button>
+            <button class="btn-sm-outline" onclick="toggleCloudConfigDrawer()" style="height:28px;">⚙️ DB Settings</button>
+          </div>
+        </div>
+
+        <div id="cloudConfigDrawer" style="display:none; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border-color);">
+          <div style="font-size:11px; font-weight:600; margin-bottom:4px;">Firebase Realtime Database URL:</div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <input type="text" id="firebaseDbUrlInput" class="filter-search-box" style="flex:1; min-width:240px; font-size:11.5px;" placeholder="https://your-project-default-rtdb.firebaseio.com">
+            <button class="btn-primary" style="height:30px; font-size:11.5px; padding:0 10px;" onclick="saveCloudDbUrl()">Save URL</button>
+          </div>
+          <div style="font-size:10.5px; color:var(--text-muted); margin-top:6px; line-height:1.4;">
+            💡 <strong>Multi-phone live sync:</strong> In Firebase Console (<code>festoria-cd375</code>) &gt; <em>Realtime Database</em> &gt; <em>Rules</em>, set <code>{ "rules": { ".read": true, ".write": true } }</code> and click <strong>Publish</strong>.
+          </div>
+        </div>
+      </div>
+
       <!-- KPI cards -->
       <div class="kpi-mini-grid">
         <div class="kpi-mini-card">
@@ -1471,7 +1501,144 @@
 
     const STORAGE_KEY_SELECTIONS = "artalive_selections_v1";
     const STORAGE_KEY_CUSTOM_PARTICIPANTS = "artalive_custom_participants_v1";
+    const STORAGE_KEY_ACTIVE_USER = "artalive_active_user_v1";
+    const STORAGE_KEY_FIREBASE_URL = "artalive_firebase_url_v1";
+    const DEFAULT_FIREBASE_URL = "https://festoria-cd375-default-rtdb.firebaseio.com";
     const DEFAULT_ADMIN_PIN = "9844";
+
+    let cloudSyncStatus = "checking"; // 'connected', 'locked', 'offline', 'disabled'
+
+    function getFirebaseUrl() {
+      const url = localStorage.getItem(STORAGE_KEY_FIREBASE_URL) || DEFAULT_FIREBASE_URL;
+      return url.replace(/\/+$/, "");
+    }
+
+    function setFirebaseUrl(url) {
+      if (!url) {
+        localStorage.removeItem(STORAGE_KEY_FIREBASE_URL);
+      } else {
+        localStorage.setItem(STORAGE_KEY_FIREBASE_URL, url.trim().replace(/\/+$/, ""));
+      }
+      syncCloudData(true);
+    }
+
+    // Cloud Data Syncing (Works with Firebase Realtime DB REST API)
+    async function syncCloudData(userInitiated = false) {
+      const baseUrl = getFirebaseUrl();
+      if (!baseUrl) return;
+
+      const statusBadge = document.getElementById("cloudSyncStatusBadge");
+      if (statusBadge) statusBadge.textContent = "Syncing...";
+
+      try {
+        // 1. Fetch cloud custom participants
+        const partsResp = await fetch(`${baseUrl}/custom_participants.json`, { cache: "no-store" });
+        if (partsResp.ok) {
+          const cloudParts = await partsResp.json();
+          if (cloudParts && Array.isArray(cloudParts)) {
+            const localCustom = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM_PARTICIPANTS) || "[]");
+            // Merge custom participants by rollNo / id
+            const existingRolls = new Set(localCustom.map(p => p.rollNo));
+            let merged = [...localCustom];
+            cloudParts.forEach(cp => {
+              if (cp && cp.rollNo && !existingRolls.has(cp.rollNo)) {
+                merged.push(cp);
+                existingRolls.add(cp.rollNo);
+              }
+            });
+            localStorage.setItem(STORAGE_KEY_CUSTOM_PARTICIPANTS, JSON.stringify(merged));
+          }
+        }
+
+        // 2. Fetch cloud selections
+        const selResp = await fetch(`${baseUrl}/selections.json`, { cache: "no-store" });
+        if (selResp.ok) {
+          const cloudSel = await selResp.json();
+          if (cloudSel && typeof cloudSel === "object") {
+            const localSel = getAllSelectionsMap();
+            // Merge selections (cloud takes priority for other participants, local active preserved)
+            const mergedSel = { ...localSel, ...cloudSel };
+            saveSelectionsMap(mergedSel);
+            cloudSyncStatus = "connected";
+            if (statusBadge) {
+              statusBadge.textContent = "🟢 Live Cloud Sync Active";
+              statusBadge.style.color = "var(--primary)";
+            }
+          }
+        } else if (selResp.status === 401) {
+          cloudSyncStatus = "locked";
+          if (statusBadge) {
+            statusBadge.textContent = "⚠️ Firebase Rules Locked (HTTP 401)";
+            statusBadge.style.color = "var(--warning)";
+          }
+        } else {
+          cloudSyncStatus = "error";
+          if (statusBadge) {
+            statusBadge.textContent = `⚠️ Cloud Error (${selResp.status})`;
+            statusBadge.style.color = "var(--danger)";
+          }
+        }
+      } catch (err) {
+        console.warn("Cloud sync offline or blocked:", err);
+        cloudSyncStatus = "offline";
+        if (statusBadge) {
+          statusBadge.textContent = "⚪ Local Storage Mode (Offline)";
+          statusBadge.style.color = "var(--text-muted)";
+        }
+      }
+
+      // Re-render views with freshly synced data
+      refreshPublicData();
+      if (isAdminUnlocked) {
+        updateAdminKPIs();
+        renderAdminTable();
+      }
+      if (activeParticipant) {
+        const mySaved = getParticipantSelections(activeParticipant.id);
+        activeDraftSelections = new Set(mySaved);
+        renderProgrammeCards();
+        updateStickyBar();
+      }
+
+      if (userInitiated) {
+        if (cloudSyncStatus === "connected") {
+          showToast("✅ Cloud database synced successfully!");
+        } else if (cloudSyncStatus === "locked") {
+          showToast("⚠️ Firebase Database rules locked! Set .read: true in Firebase Console.");
+        } else {
+          showToast("Loaded data from local storage.");
+        }
+      }
+    }
+
+    async function pushParticipantSelectionToCloud(partId, selectionsArr) {
+      const baseUrl = getFirebaseUrl();
+      if (!baseUrl) return;
+      try {
+        await fetch(`${baseUrl}/selections/${partId}.json`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(selectionsArr)
+        });
+      } catch (err) {
+        console.warn("Failed pushing selection to cloud:", err);
+      }
+    }
+
+    async function pushCustomParticipantsToCloud(partsArr) {
+      const baseUrl = getFirebaseUrl();
+      if (!baseUrl) return;
+      try {
+        await fetch(`${baseUrl}/custom_participants.json`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(partsArr)
+        });
+      } catch (err) {
+        console.warn("Failed pushing custom participants to cloud:", err);
+      }
+    }
+
 
     let isAdminUnlocked = false;
     let activeParticipant = null;
@@ -1498,8 +1665,22 @@
 
 
     document.addEventListener("DOMContentLoaded", () => {
-      renderProgrammeCards();
-      updateStickyBar();
+      // 1. Auto-restore active participant if saved previously on this device
+      const savedActiveId = localStorage.getItem(STORAGE_KEY_ACTIVE_USER);
+      if (savedActiveId) {
+        selectParticipant(savedActiveId, false); // false = don't toast on initial reload
+      } else {
+        renderProgrammeCards();
+        updateStickyBar();
+      }
+
+      // 2. Initial cloud synchronization
+      syncCloudData(false);
+
+      // 3. Periodic cloud background sync every 15 seconds
+      setInterval(() => {
+        syncCloudData(false);
+      }, 15000);
 
       document.addEventListener("click", (e) => {
         const wrap = document.getElementById("participantSearchWrap");
@@ -1630,7 +1811,7 @@
       if (dropdown) dropdown.classList.remove("show");
     }
 
-    function selectParticipant(id) {
+    function selectParticipant(id, showFeedbackToast = true) {
       const allParts = getAllParticipants();
       const participant = allParts.find(p => p.id === id);
       if (!participant) return;
@@ -1686,12 +1867,18 @@
       renderProgrammeCards();
       updateStickyBar();
 
-      showToast(`Loaded ${participant.name} (${participant.rollNo})`);
+      // Remember active participant on this device
+      localStorage.setItem(STORAGE_KEY_ACTIVE_USER, participant.id);
+
+      if (showFeedbackToast) {
+        showToast(`Loaded ${participant.name} (${participant.rollNo})`);
+      }
     }
 
     function changeActiveParticipant() {
       activeParticipant = null;
       activeDraftSelections.clear();
+      localStorage.removeItem(STORAGE_KEY_ACTIVE_USER);
       document.getElementById("activeParticipantBanner").classList.remove("show");
       const wrap = document.getElementById("participantSearchWrap");
       wrap.style.display = "block";
@@ -1924,7 +2111,13 @@
     }
 
     function saveActiveSelections() {
-      if (!activeParticipant) return;
+      if (!activeParticipant) {
+        showToast("⚠️ Please search and select your name first!");
+        const input = document.getElementById("participantSearchInput");
+        input.focus();
+        input.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
 
       const isJunior = isJuniorParticipant(activeParticipant);
       const isSenior = isSeniorParticipant(activeParticipant);
@@ -1940,12 +2133,19 @@
 
       activeDraftSelections = new Set(arr);
 
+      // Save locally
       const map = getAllSelectionsMap();
       map[activeParticipant.id] = arr;
       saveSelectionsMap(map);
 
+      // Remember active participant
+      localStorage.setItem(STORAGE_KEY_ACTIVE_USER, activeParticipant.id);
+
+      // Push to cloud database asynchronously
+      pushParticipantSelectionToCloud(activeParticipant.id, arr);
+
       document.getElementById("activeUserSavedCount").textContent = `(${arr.length} saved)`;
-      showToast(`Saved ${arr.length} programmes for ${activeParticipant.name}!`);
+      showToast(`✅ Successfully saved ${arr.length} programmes for ${activeParticipant.name}!`);
 
       renderProgrammeCards();
       updateStickyBar();
@@ -2305,6 +2505,25 @@
       refreshPublicData();
     }
 
+        function toggleCloudConfigDrawer() {
+      const el = document.getElementById("cloudConfigDrawer");
+      if (el) {
+        const isHidden = el.style.display === "none";
+        el.style.display = isHidden ? "block" : "none";
+        if (isHidden) {
+          const inp = document.getElementById("firebaseDbUrlInput");
+          if (inp) inp.value = getFirebaseUrl();
+        }
+      }
+    }
+
+    function saveCloudDbUrl() {
+      const inp = document.getElementById("firebaseDbUrlInput");
+      if (!inp) return;
+      setFirebaseUrl(inp.value.trim());
+      showToast("Firebase Database URL saved!");
+    }
+
     function handleAddNewParticipant(e) {
       e.preventDefault();
       const roll = document.getElementById("newPartRoll").value.trim().toUpperCase();
@@ -2320,12 +2539,16 @@
       }
 
       const custom = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM_PARTICIPANTS) || "[]");
-      custom.push({ id: `C_${Date.now()}`, slNo: all.length + 1, name, rollNo: roll, batch });
+      const newEntry = { id: `C_${Date.now()}`, slNo: all.length + 1, name, rollNo: roll, batch };
+      custom.push(newEntry);
       localStorage.setItem(STORAGE_KEY_CUSTOM_PARTICIPANTS, JSON.stringify(custom));
+
+      // Push to cloud database
+      pushCustomParticipantsToCloud(custom);
 
       document.getElementById("newPartRoll").value = "";
       document.getElementById("newPartName").value = "";
-      showToast(`Added ${name} (${roll})`);
+      showToast(`✅ Added ${name} (${roll})! Saved locally and synced.`);
 
       updateAdminKPIs();
       renderAdminTable();
