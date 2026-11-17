@@ -1670,6 +1670,19 @@
       document.getElementById("activeUserBatch").textContent = batchLabel;
       document.getElementById("activeUserSavedCount").textContent = saved.length > 0 ? `(${saved.length} saved)` : "(0 saved)";
 
+      // Reset incompatible section filter if active
+      if (isJunior && currentSecFilter === "Senior") {
+        currentSecFilter = "all";
+        document.querySelectorAll("[data-sec]").forEach(b => b.classList.remove("active"));
+        const allBtn = document.querySelector('[data-sec="all"]');
+        if (allBtn) allBtn.classList.add("active");
+      } else if (isSenior && currentSecFilter === "Junior") {
+        currentSecFilter = "all";
+        document.querySelectorAll("[data-sec]").forEach(b => b.classList.remove("active"));
+        const allBtn = document.querySelector('[data-sec="all"]');
+        if (allBtn) allBtn.classList.add("active");
+      }
+
       renderProgrammeCards();
       updateStickyBar();
 
@@ -1690,10 +1703,48 @@
     }
 
     // Filters
+    function updateSectionFilterButtons() {
+      const juniorBtn = document.querySelector('[data-sec="Junior"]');
+      const seniorBtn = document.querySelector('[data-sec="Senior"]');
+      if (!juniorBtn || !seniorBtn) return;
+
+      const isJunior = isJuniorParticipant(activeParticipant);
+      const isSenior = isSeniorParticipant(activeParticipant);
+
+      if (isJunior) {
+        seniorBtn.style.opacity = "0.45";
+        seniorBtn.title = "Restricted: Senior programmes not allowed for Junior participants";
+        juniorBtn.style.opacity = "1";
+        juniorBtn.title = "";
+      } else if (isSenior) {
+        juniorBtn.style.opacity = "0.45";
+        juniorBtn.title = "Restricted: Junior programmes not allowed for Senior participants";
+        seniorBtn.style.opacity = "1";
+        seniorBtn.title = "";
+      } else {
+        juniorBtn.style.opacity = "1";
+        seniorBtn.style.opacity = "1";
+        juniorBtn.title = "";
+        seniorBtn.title = "";
+      }
+    }
+
     function setSecFilter(sec, btn) {
+      if (activeParticipant) {
+        if (isJuniorParticipant(activeParticipant) && sec === "Senior") {
+          showToast("⚠️ Note: Junior participants cannot select Senior programmes!");
+        } else if (isSeniorParticipant(activeParticipant) && sec === "Junior") {
+          showToast("⚠️ Note: Senior participants cannot select Junior programmes!");
+        }
+      }
       currentSecFilter = sec;
       document.querySelectorAll("[data-sec]").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+      if (btn) {
+        btn.classList.add("active");
+      } else {
+        const targetBtn = document.querySelector(`[data-sec="${sec}"]`);
+        if (targetBtn) targetBtn.classList.add("active");
+      }
       renderProgrammeCards();
     }
 
@@ -1721,6 +1772,7 @@
 
     // Render Cards
     function renderProgrammeCards() {
+      updateSectionFilterButtons();
       const grid = document.getElementById("programmesGrid");
       document.getElementById("countOnlySelected").textContent = activeDraftSelections.size;
 
