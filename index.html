@@ -1215,7 +1215,7 @@
             <button class="btn-primary" style="height:30px; font-size:11.5px; padding:0 10px;" onclick="saveCloudDbUrl()">Save URL</button>
           </div>
           <div style="font-size:10.5px; color:var(--text-muted); margin-top:6px; line-height:1.4;">
-            💡 <strong>Multi-phone live sync:</strong> In Firebase Console (<code>festoria-cd375</code>) &gt; <em>Realtime Database</em> &gt; <em>Rules</em>, set <code>{ "rules": { ".read": true, ".write": true } }</code> and click <strong>Publish</strong>.
+            💡 <strong>Multi-phone live sync:</strong> In Firebase Console (<code>team-a-4b6b6</code>) &gt; <em>Realtime Database</em> &gt; <em>Rules</em>, set <code>{ "rules": { ".read": true, ".write": true } }</code> and click <strong>Publish</strong>.
           </div>
         </div>
       </div>
@@ -1499,18 +1499,33 @@
   { id: "G45", section: "General", sectionMl: "ജനറൽ", type: "Off stage", code: 45, nameMl: "സയൻസ് വിഷൻ", nameEn: "Science Vision" }
 ];
 
+    // Your Firebase Configuration for Art Alive / Team A
+    const FIREBASE_CONFIG = {
+      apiKey: "AIzaSyCL4e-yrgV6g8dMrPBDDHPMvktiuuYQY3o",
+      authDomain: "team-a-4b6b6.firebaseapp.com",
+      databaseURL: "https://team-a-4b6b6-default-rtdb.firebaseio.com",
+      projectId: "team-a-4b6b6",
+      storageBucket: "team-a-4b6b6.firebasestorage.app",
+      messagingSenderId: "488874220140",
+      appId: "1:488874220140:web:85570b696e74d2ade41649",
+      measurementId: "G-H4R4JVFTCX"
+    };
+
     const STORAGE_KEY_SELECTIONS = "artalive_selections_v1";
     const STORAGE_KEY_CUSTOM_PARTICIPANTS = "artalive_custom_participants_v1";
     const STORAGE_KEY_ACTIVE_USER = "artalive_active_user_v1";
     const STORAGE_KEY_FIREBASE_URL = "artalive_firebase_url_v1";
-    const DEFAULT_FIREBASE_URL = "https://festoria-cd375-default-rtdb.firebaseio.com";
+    const DEFAULT_FIREBASE_URL = "https://team-a-4b6b6-default-rtdb.firebaseio.com";
     const DEFAULT_ADMIN_PIN = "9844";
 
     let cloudSyncStatus = "checking"; // 'connected', 'locked', 'offline', 'disabled'
 
     function getFirebaseUrl() {
-      const url = localStorage.getItem(STORAGE_KEY_FIREBASE_URL) || DEFAULT_FIREBASE_URL;
-      return url.replace(/\/+$/, "");
+      const customUrl = localStorage.getItem(STORAGE_KEY_FIREBASE_URL);
+      if (customUrl && !customUrl.includes("festoria")) {
+        return customUrl.trim().replace(/\/+$/, "");
+      }
+      return DEFAULT_FIREBASE_URL;
     }
 
     function setFirebaseUrl(url) {
